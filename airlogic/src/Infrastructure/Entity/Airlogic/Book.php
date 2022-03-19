@@ -4,7 +4,6 @@ namespace App\Infrastructure\Entity\Airlogic;
 
 
 use App\Infrastructure\Repository\BaseRepository\AbstractEntity;
-use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -23,7 +22,6 @@ class Book extends AbstractEntity
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Exclude()
      */
     private int $id;
 
@@ -34,17 +32,14 @@ class Book extends AbstractEntity
     private string $name;
 
     /**
-     * @Exclude()
+     *
      * Many features have one product. This is the owning side.
      * @ManyToOne(targetEntity="App\Infrastructure\Entity\Airlogic\Author", inversedBy="books")
      * @JoinColumn(name="author_id", referencedColumnName="id")
      */
     private Author $author;
 
-    /**
-     * @var integer
-     */
-    private int $authorId;
+
 
 
 
@@ -88,19 +83,6 @@ class Book extends AbstractEntity
         $this->name = $name;
     }
 
-    /**
-     * @return int
-     */
-    public function getAuthorId(): int
-    {
-        return $this->authorId;
-    }
 
-    /**
-     * @param int $authorId
-     */
-    public function setAuthorId(int $authorId): void
-    {
-        $this->authorId = $authorId;
-    }
+
 }

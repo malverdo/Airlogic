@@ -10,4 +10,14 @@ class AuthorFlash implements FlashInterface
     {
         return  'Автора не существует';
     }
+
+    public static function getAuthorNotFound(): array
+    {
+        return  ['message' => 'Автор не найден'];
+    }
+
+    public static function getAuthorCreate(): string
+    {
+        return   'Автор успешно создан';
+    }
 }

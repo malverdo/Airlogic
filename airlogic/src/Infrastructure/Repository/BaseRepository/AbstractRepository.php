@@ -49,4 +49,15 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Rep
         }
         return $entity;
     }
+
+    public function findLikeName(string $name)
+    {
+        $createQueryBuilder = $this->createQueryBuilder($this->getTableAlias())
+            ->where($this->getTableAlias() . '.name LIKE :name')
+            ->orderBy($this->getTableAlias() . '.id', 'ASC')
+            ->setParameter('name', '%' . $name . '%')
+            ->getQuery();
+
+        return $createQueryBuilder->getResult();
+    }
 }

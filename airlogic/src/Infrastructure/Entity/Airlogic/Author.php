@@ -23,7 +23,6 @@ class Author extends AbstractEntity implements AuthorEntityInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Exclude()
      */
     private int $id;
 
@@ -33,7 +32,7 @@ class Author extends AbstractEntity implements AuthorEntityInterface
     private string $name;
 
     /**
-     * @Exclude()
+     *
      * @OneToMany(targetEntity="App\Infrastructure\Entity\Airlogic\Book", mappedBy="author", cascade={"persist"})
      */
     private object $books;

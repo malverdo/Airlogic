@@ -4,6 +4,7 @@ namespace App\Infrastructure\Service;
 
 
 use App\Infrastructure\Exception\InvalidRequestException;
+use App\Infrastructure\Repository\BaseRepository\Contracts\DtoInterface;
 use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -23,10 +24,10 @@ class ValidationService
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param DtoInterface $entity
      * @throws InvalidRequestException
      */
-    public function validator(EntityInterface $entity)
+    public function validator(DtoInterface $entity)
     {
         $violationsList = $this->validator->validate($entity);
         if (\count($violationsList) > 0) {

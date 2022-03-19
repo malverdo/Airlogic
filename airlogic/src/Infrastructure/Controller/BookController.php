@@ -4,9 +4,12 @@ namespace App\Infrastructure\Controller;
 
 
 use App\Domain\Book\BookService;
+use App\Infrastructure\Dto\BookCreateRequestDto;
 use App\Infrastructure\Exception\InvalidRequestException;
 use App\Infrastructure\Repository\Author\AuthorRepository;
 use App\Infrastructure\Repository\BaseRepository\Exception\NotFoundException;
+use App\Infrastructure\Repository\Book\BookFactory;
+use App\Infrastructure\Repository\Book\BookFlash;
 use App\Infrastructure\Repository\Book\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,16 +23,12 @@ class BookController extends AbstractController
 
     private AuthorRepository $authorRepository;
 
-    private BookRepository $bookRepository;
-
     public function __construct(
         BookService $bookService,
-        AuthorRepository $authorRepository,
-        BookRepository $bookRepository
+        AuthorRepository $authorRepository
     ) {
         $this->bookService = $bookService;
         $this->authorRepository = $authorRepository;
-        $this->bookRepository = $bookRepository;
     }
 
     /**
@@ -38,26 +37,16 @@ class BookController extends AbstractController
      */
     public function create(Request $request): array
     {
-        $book = $this->bookService->serializerAndValidation($request->getContent());
-        $author = $this->authorRepository->findId($book->getAuthorId(),  $this->bookService->getFlash());
+        $bookCreateRequestDto = $this->bookService->serializerAndValidation($request->getContent(), BookCreateRequestDto::class);
+        $author = $this->authorRepository->findId($bookCreateRequestDto->authorId,  $this->bookService->getFlash());
+        $book = BookFactory::bookCreateDtoAndAuthor($bookCreateRequestDto, $author);
         $book->setName($this->bookService->defaultTranslate($book->getName()));
-        $book->setAuthor($author);
         $this->bookService->save($book);
 
         return [
             'text' => 'Книга успешно создана',
-            'id' => $book->getId(),
-            'name' => $book->getName(),
-            'author' => [
-                'id' => $book->getAuthor()->getId(),
-                'name' => $book->getAuthor()->getName(),
-            ],
+            'book' => json_decode($this->bookService->serializer($book))
         ];
     }
 
-
-    public function search(Request $request): array
-    {
-
-    }
 }

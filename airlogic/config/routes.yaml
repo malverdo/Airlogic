@@ -4,6 +4,11 @@ author.create:
   controller: App\Infrastructure\Controller\AuthorController::create
   methods: POST
 
+author.serach:
+  path: /author/serach
+  controller: App\Infrastructure\Controller\AuthorController::search
+  methods: GET
+
 #book
 book.create:
   path: /book/create

@@ -4,6 +4,8 @@ namespace App\Infrastructure\Controller;
 
 use App\Domain\Author\AuthorService;
 use App\Infrastructure\Exception\InvalidRequestException;
+use App\Infrastructure\Repository\Author\AuthorFlash;
+use App\Infrastructure\Repository\Author\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -14,10 +16,12 @@ class AuthorController extends AbstractController
      * @var AuthorService
      */
     private AuthorService $authorService;
+    private AuthorRepository $authorRepository;
 
-    public function __construct(AuthorService $authorService)
+    public function __construct(AuthorService $authorService, AuthorRepository $authorRepository)
     {
         $this->authorService = $authorService;
+        $this->authorRepository = $authorRepository;
     }
 
     /**
@@ -30,9 +34,21 @@ class AuthorController extends AbstractController
         $this->authorService->save($author);
 
         return [
-            'text' => 'Автор успешно создан',
+            'text' => AuthorFlash::getAuthorCreate(),
             'id' => $author->getId(),
             'name' => $author->getName()
         ];
+    }
+
+    public function search(Request $request): array
+    {
+        $name = $request->query->get('name');
+        $author = $this->authorRepository->findLikeName($name);
+        $authors = [];
+        foreach ($author as $value) {
+            $authors[] = json_decode($this->authorService->serializer($value));
+        }
+
+        return $authors ?: AuthorFlash::getAuthorNotFound();
     }
 }

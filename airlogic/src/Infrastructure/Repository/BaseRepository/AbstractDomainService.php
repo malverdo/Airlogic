@@ -5,6 +5,7 @@ namespace App\Infrastructure\Repository\BaseRepository;
 
 use App\Infrastructure\Entity\Airlogic\Author;
 use App\Infrastructure\Exception\InvalidRequestException;
+use App\Infrastructure\Repository\BaseRepository\Contracts\DtoInterface;
 use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 use App\Infrastructure\Repository\BaseRepository\Contracts\RepositoryInterface;
 use App\Infrastructure\Service\SerializerService;
@@ -50,11 +51,18 @@ abstract class AbstractDomainService
     /**
      * @throws InvalidRequestException
      */
-    public function serializerAndValidation($content) :EntityInterface
+    public function serializerAndValidation($content, $dtoRequest = null): DtoInterface
     {
-        $entity = $this->serializerService->getSerializer()->deserialize($content, $this->getNameEntity(), 'json');
-        $this->validationService->validator($entity);
-        return $entity;
+        $dto = $this->serializerService->getSerializer()->deserialize($content, $dtoRequest , 'json');
+        $this->validationService->validator($dto);
+        return $dto;
+    }
+
+    /**
+     */
+    public function serializer($content) : string
+    {
+        return $this->serializerService->getSerializer()->serialize($content, 'json' );
     }
 
     public function defaultTranslate($text)

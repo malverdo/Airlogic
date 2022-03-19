@@ -28,4 +28,6 @@ class BookRepository extends  AbstractRepository
     {
         parent::__construct($this->getBD(), $this->getEntityName(), $registry);
     }
+
+
 }

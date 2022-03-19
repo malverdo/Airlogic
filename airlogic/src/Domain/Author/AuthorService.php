@@ -27,4 +27,16 @@ class AuthorService extends AbstractDomainService implements DomainServiceInterf
     {
         return Author::class;
     }
+
+    public function builderBook(array $books): array
+    {
+        $arrayBooks = [];
+        foreach ($books as $book) {
+            $arrayBooks[] = [
+                'id' => $book->getId(),
+                'name' => $book->getName()
+            ];
+        }
+        return $arrayBooks;
+    }
 }

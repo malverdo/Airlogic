@@ -14,7 +14,8 @@ App\Infrastructure\Entity\Airlogic\Author:
           minMessage: "минимальная длина поле 'name' 3 символа"
           maxMessage: "максимальная длина поле 'name' 30 символа"
 
-App\Infrastructure\Entity\Airlogic\Book:
+
+App\Infrastructure\Dto\BookCreateRequestDto:
   properties:
     name:
       - NotBlank: {message: "нет поле 'name'"}
