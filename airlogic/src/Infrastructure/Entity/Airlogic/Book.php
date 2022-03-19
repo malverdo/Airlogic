@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Entity\Airlogic;
 
 
+use App\Infrastructure\Repository\BaseRepository\AbstractEntity;
 use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping\Table;
  * @Entity
  * @Table(name="book")
  */
-class Book implements EntityInterface
+class Book extends AbstractEntity
 {
     /**
      * @ORM\Id

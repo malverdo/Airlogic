@@ -2,6 +2,8 @@
 
 namespace App\Infrastructure\Entity\Airlogic;
 
+use App\Domain\Author\Contract\AuthorEntityInterface;
+use App\Infrastructure\Repository\BaseRepository\AbstractEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,13 +11,13 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 use JMS\Serializer\Annotation\Exclude;
-use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 
 /**
  * @Entity
  * @Table(name="author")
+ * @Entity(repositoryClass="App\Infrastructure\Repository\Author\AuthorRepository")
  */
-class Author implements EntityInterface
+class Author extends AbstractEntity implements AuthorEntityInterface
 {
     /**
      * @ORM\Id

@@ -9,7 +9,6 @@ use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 use App\Infrastructure\Service\SerializerService;
 use App\Infrastructure\Service\TranslateService;
 use App\Infrastructure\Service\ValidationService;
-use Dejurin\GoogleTranslateForFree;
 
 class AuthorService
 {

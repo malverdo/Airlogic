@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Infrastructure\Repository\Author;
+namespace App\Infrastructure\Repository\Book;
 
-
-
-use App\Domain\Author\Contract\AuthorRepositoryInterface;
+use App\Infrastructure\Entity\Airlogic\Book;
 use App\Infrastructure\Repository\BaseRepository\AbstractRepository;
-use App\Infrastructure\Entity\Airlogic\Author;
 use Doctrine\Persistence\ManagerRegistry;
 
-class AuthorRepository  extends  AbstractRepository implements AuthorRepositoryInterface
+class BookRepository extends  AbstractRepository
 {
     public function getEntityName(): string
     {
-        return Author::class;
+        return Book::class;
     }
 
     public function getBD(): string

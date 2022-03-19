@@ -3,11 +3,12 @@
 namespace App\Infrastructure\Repository\BaseRepository;
 
 use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
+use App\Infrastructure\Repository\BaseRepository\Contracts\RepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 
-class AbstractRepository extends ServiceEntityRepository
+class AbstractRepository extends ServiceEntityRepository implements RepositoryInterface
 {
 
     public ObjectManager $managerRegistry;
