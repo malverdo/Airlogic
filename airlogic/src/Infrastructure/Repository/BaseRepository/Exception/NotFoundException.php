@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Infrastructure\Exception;
+namespace App\Infrastructure\Repository\BaseRepository\Exception;
 
-class InvalidRequestException  extends  \Exception
+class NotFoundException extends  \Exception
 {
-    const MESSAGE = 'В запросе обнаружена ошибка или неверный вид JSON';
+
+    const MESSAGE = '';
 
     /**
      * @var string

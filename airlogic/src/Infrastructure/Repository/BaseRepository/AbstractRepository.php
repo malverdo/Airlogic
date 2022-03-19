@@ -2,13 +2,17 @@
 
 namespace App\Infrastructure\Repository\BaseRepository;
 
+use App\Infrastructure\Repository\Author\AuthorFlash;
+use App\Infrastructure\Repository\BaseRepository\Contracts\AuthorInterface;
 use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
+use App\Infrastructure\Repository\BaseRepository\Contracts\FlashInterface;
 use App\Infrastructure\Repository\BaseRepository\Contracts\RepositoryInterface;
+use App\Infrastructure\Repository\BaseRepository\Exception\NotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 
-class AbstractRepository extends ServiceEntityRepository implements RepositoryInterface
+abstract class AbstractRepository extends ServiceEntityRepository implements RepositoryInterface
 {
 
     public ObjectManager $managerRegistry;
@@ -23,5 +27,26 @@ class AbstractRepository extends ServiceEntityRepository implements RepositoryIn
     {
         $this->managerRegistry->persist($entity);
         $this->managerRegistry->flush();
+    }
+
+    /**
+     * @throws NotFoundException
+     */
+    public function flashException(FlashInterface $flash)
+    {
+        throw new NotFoundException($flash->getMiss());
+    }
+
+
+    /**
+     * @throws NotFoundException
+     */
+    public function findId($id, FlashInterface $flash = null, $lockMode = null, $lockVersion = null)
+    {
+        $entity = $this->find($id, $lockMode, $lockVersion);
+        if (!$entity && $flash) {
+            $this->flashException($flash);
+        }
+        return $entity;
     }
 }

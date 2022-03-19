@@ -31,4 +31,6 @@ class AuthorRepository  extends  AbstractRepository implements AuthorRepositoryI
     {
         parent::__construct($this->getBD(), $this->getEntityName(), $registry);
     }
+
+
 }

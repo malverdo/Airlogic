@@ -13,3 +13,24 @@ App\Infrastructure\Entity\Airlogic\Author:
           min: 3
           minMessage: "минимальная длина поле 'name' 3 символа"
           maxMessage: "максимальная длина поле 'name' 30 символа"
+
+App\Infrastructure\Entity\Airlogic\Book:
+  properties:
+    name:
+      - NotBlank: {message: "нет поле 'name'"}
+      - Regex:
+          pattern: '/[^\s]$/'
+          message: нельзя пробелы в конце и в начале строки поля 'name'
+      - Regex:
+          pattern: '/[^\d]$/'
+          message: нельзя цифры в поле 'name'
+      - Length:
+          max: 15
+          min: 3
+          minMessage: "минимальная длина поле 'name' 3 символа"
+          maxMessage: "максимальная длина поле 'name' 30 символа"
+    authorId:
+      - NotBlank: { message: "нет поле 'id'" }
+      - Regex:
+          pattern: '/^((\d)+(\d)+)$/'
+          message: поле 'id' принимает только цифры

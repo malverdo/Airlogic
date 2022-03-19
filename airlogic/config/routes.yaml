@@ -5,3 +5,7 @@ author.create:
   methods: POST
 
 #book
+book.create:
+  path: /book/create
+  controller: App\Infrastructure\Controller\BookController::create
+  methods: POST

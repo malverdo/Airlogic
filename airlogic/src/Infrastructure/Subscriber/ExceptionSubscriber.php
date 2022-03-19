@@ -8,24 +8,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use App\Infrastructure\Exception\InvalidRequestException;
 
 class ExceptionSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
-        // return the subscribed events, their methods and priorities
         return [
             KernelEvents::EXCEPTION => [
-                ['InvalidArgumentException', 10]
+                ['InvalidException', 10]
             ],
         ];
     }
 
-    public function InvalidArgumentException(ExceptionEvent $event)
+    public function InvalidException(ExceptionEvent $event)
     {
         $exception = $event->getThrowable();
-        if (is_a($exception,'App\Infrastructure\Exception\InvalidRequestException') ) {
+        if (
+            is_a($exception,'App\Infrastructure\Exception\InvalidRequestException') ||
+            is_a($exception,'App\Infrastructure\Repository\BaseRepository\Exception\NotFoundException')
+        ) {
             $array = ['Error' =>  $exception->getMessage()];
             $response = new JsonResponse();
             $response->setContent(json_encode($array, JSON_UNESCAPED_UNICODE));
