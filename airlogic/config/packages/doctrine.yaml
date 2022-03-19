@@ -8,14 +8,19 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Infrastructure/Entity'
-                prefix: 'App\Entity'
-                alias: App
+#        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        default_entity_manager: airlogic
+#        auto_mapping: true
+        entity_managers:
+            airlogic:
+                connection: airlogic
+                mappings:
+                    cardsmile:
+                        is_bundle: false
+                        type: annotation
+                        dir: '%kernel.project_dir%/src/Infrastructure/Entity/Airlogic'
+                        prefix: 'App\Infrastructure\Entity\Airlogic'
+                        alias: airlogic
 
 when@test:
     doctrine:

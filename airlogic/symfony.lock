@@ -101,6 +101,12 @@
     "fzaninotto/faker": {
         "version": "v1.9.2"
     },
+    "jms/metadata": {
+        "version": "2.6.1"
+    },
+    "jms/serializer": {
+        "version": "3.17.1"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
@@ -371,9 +377,6 @@
     },
     "symfony/runtime": {
         "version": "v5.4.5"
-    },
-    "symfony/serializer": {
-        "version": "v5.4.6"
     },
     "symfony/service-contracts": {
         "version": "v2.5.0"

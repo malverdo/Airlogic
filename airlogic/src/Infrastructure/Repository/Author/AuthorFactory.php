@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Repository\Author;
 
-use App\Entity\Airlogic\Author;
-use App\Entity\Airlogic\Book;
+use App\Infrastructure\Entity\Airlogic\Author;
+use App\Infrastructure\Entity\Airlogic\Book;
 
 class AuthorFactory
 {

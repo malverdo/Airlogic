@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity\Airlogic;
+namespace App\Infrastructure\Entity\Airlogic;
 
 
+use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping\Table;
  * @Entity
  * @Table(name="book")
  */
-class Book
+class Book implements EntityInterface
 {
     /**
      * @ORM\Id
@@ -30,7 +31,7 @@ class Book
 
     /**
      * Many features have one product. This is the owning side.
-     * @ManyToOne(targetEntity="App\Entity\Airlogic\Author", inversedBy="books")
+     * @ManyToOne(targetEntity="App\Infrastructure\Entity\Airlogic\Author", inversedBy="books")
      * @JoinColumn(name="author_id", referencedColumnName="id")
      */
     private Author $author;

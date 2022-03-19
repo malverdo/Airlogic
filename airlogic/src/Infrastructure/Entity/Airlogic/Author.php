@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Entity\Airlogic;
+namespace App\Infrastructure\Entity\Airlogic;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
+use JMS\Serializer\Annotation\Exclude;
+use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 
 /**
  * @Entity
  * @Table(name="author")
  */
-class Author
+class Author implements EntityInterface
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Exclude()
      */
     private int $id;
 
@@ -30,8 +31,8 @@ class Author
     private string $name;
 
     /**
-     * One product has many features. This is the inverse side.
-     * @OneToMany(targetEntity="App\Entity\Airlogic\Book", mappedBy="author", cascade={"persist"})
+     * @Exclude()
+     * @OneToMany(targetEntity="App\Infrastructure\Entity\Airlogic\Book", mappedBy="author", cascade={"persist"})
      */
     private object $books;
 

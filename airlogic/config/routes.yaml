@@ -1,3 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+#author
+author.create:
+  path: /author/create
+  controller: App\Infrastructure\Controller\AuthorController::create
+  methods: POST
+
+#book

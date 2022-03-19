@@ -1,8 +1,8 @@
 <?php
 namespace App\Infrastructure\Repository\Book;
 
-use App\Entity\Airlogic\Author;
-use App\Entity\Airlogic\Book;
+use App\Infrastructure\Entity\Airlogic\Author;
+use App\Infrastructure\Entity\Airlogic\Book;
 
 class BookFactory
 {
