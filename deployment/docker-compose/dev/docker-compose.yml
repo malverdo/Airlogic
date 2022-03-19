@@ -1,0 +1,35 @@
+version: '3'
+services:
+    web:
+        build:
+            context: /home/${HOMENAME}/${NAMEREPOSITORY}/deployment/docker/dev/nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        volumes:
+            - /home/${HOMENAME}/${NAMEREPOSITORY}/deployment/nginx/${NAMEAPI}.conf:/etc/nginx/conf.d/${NAMEAPI}.conf
+            - /home/${HOMENAME}/${NAMEREPOSITORY}/${NAMEAPI}:/home/apps/${NAMEAPI}
+        depends_on:
+            - airlogic
+    airlogic:
+        build:
+            context: /home/${HOMENAME}/${NAMEREPOSITORY}/deployment/docker/dev/${NAMEAPI}
+            dockerfile: php-fpm.docker
+        volumes:
+            - /home/${HOMENAME}/${NAMEREPOSITORY}/${NAMEAPI}:/home/apps/${NAMEAPI}
+        # настройка Xdebug
+        environment:
+            - PHP_IDE_CONFIG=serverName=${NAMEAPI}
+    postgres:
+        build:
+            context: /home/${HOMENAME}/${NAMEREPOSITORY}/deployment/docker/dev/postgres
+            dockerfile: Dockerfile
+        restart: always
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=root
+        ports: 
+            - "54321:5432"
+        volumes:
+            - /home/${HOMENAME}/${NAMEREPOSITORY}/deployment/db/docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+            - /home/${HOMENAME}/${NAMEREPOSITORY}/deployment/postgres-data:/var/lib/postgresql/data
