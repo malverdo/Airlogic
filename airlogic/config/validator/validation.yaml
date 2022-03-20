@@ -26,10 +26,10 @@ App\Infrastructure\Dto\BookCreateRequestDto:
           pattern: '/[^\d]$/'
           message: нельзя цифры в поле 'name'
       - Length:
-          max: 15
+          max: 50
           min: 3
           minMessage: "минимальная длина поле 'name' 3 символа"
-          maxMessage: "максимальная длина поле 'name' 30 символа"
+          maxMessage: "максимальная длина поле 'name' 50 символа"
     authorId:
       - NotBlank: { message: "нет поле 'id'" }
       - Regex:
