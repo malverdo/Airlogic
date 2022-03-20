@@ -15,6 +15,9 @@ use App\Infrastructure\Service\TranslateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ *
+ */
 class BookController extends AbstractController
 {
     /**
@@ -22,11 +25,26 @@ class BookController extends AbstractController
      */
     private BookService $bookService;
 
+    /**
+     * @var AuthorRepository
+     */
     private AuthorRepository $authorRepository;
+    /**
+     * @var BookRepository
+     */
     private BookRepository $bookRepository;
 
+    /**
+     * @var TranslateService
+     */
     private TranslateService $translate;
 
+    /**
+     * @param BookService $bookService
+     * @param AuthorRepository $authorRepository
+     * @param BookRepository $bookRepository
+     * @param TranslateService $translate
+     */
     public function __construct(
         BookService $bookService,
         AuthorRepository $authorRepository,

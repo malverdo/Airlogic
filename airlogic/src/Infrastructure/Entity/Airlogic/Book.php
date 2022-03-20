@@ -42,7 +42,7 @@ class Book extends AbstractEntity
 
     /**
      *
-     * Many features have one product. This is the owning side.
+     *
      * @ManyToOne(targetEntity="App\Infrastructure\Entity\Airlogic\Author", inversedBy="books")
      * @JoinColumn(name="author_id", referencedColumnName="id")
      */

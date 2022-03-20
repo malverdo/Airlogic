@@ -5,6 +5,9 @@ namespace App\Infrastructure\Service;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 
+/**
+ *
+ */
 class SerializerService
 {
     /**

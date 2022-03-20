@@ -7,9 +7,16 @@ use App\Infrastructure\Entity\Airlogic\Book;
 use App\Infrastructure\Repository\BaseRepository\Contracts\DtoInterface;
 use App\Infrastructure\Service\TranslateService;
 
+/**
+ *
+ */
 class BookFactory
 {
 
+    /**
+     * @param $name
+     * @return Book
+     */
     public static function bookCreate($name): Book
     {
         $book = new Book();
@@ -17,6 +24,11 @@ class BookFactory
         return $book;
     }
 
+    /**
+     * @param string $name
+     * @param Author $author
+     * @return Book
+     */
     public static function bookAndAuthorCreate(string $name, Author $author): Book
     {
         $book = new Book();
@@ -25,6 +37,11 @@ class BookFactory
         return $book;
     }
 
+    /**
+     * @param BookCreateRequestDto $dto
+     * @param Author $author
+     * @return Book
+     */
     public static function bookCreateDtoAndAuthor(BookCreateRequestDto $dto, Author $author): Book
     {
         $book = new Book();

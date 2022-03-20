@@ -9,8 +9,14 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+ *
+ */
 class ExceptionSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @return \array[][]
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -20,6 +26,10 @@ class ExceptionSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param ExceptionEvent $event
+     * @return void
+     */
     public function InvalidException(ExceptionEvent $event)
     {
         $exception = $event->getThrowable();

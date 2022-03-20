@@ -9,9 +9,17 @@ use App\Infrastructure\Repository\BaseRepository\Contracts\DomainServiceInterfac
 use App\Infrastructure\Service\SerializerService;
 use App\Infrastructure\Service\ValidationService;
 
+/**
+ *
+ */
 class AuthorService extends AbstractDomainService implements DomainServiceInterface
 {
 
+    /**
+     * @param SerializerService $serializerService
+     * @param ValidationService $validationService
+     * @param AuthorRepository $authorRepository
+     */
     public function __construct(
         SerializerService $serializerService,
         ValidationService $validationService,
@@ -21,11 +29,18 @@ class AuthorService extends AbstractDomainService implements DomainServiceInterf
     }
 
 
+    /**
+     * @return string
+     */
     public function getNameEntity(): string
     {
         return Author::class;
     }
 
+    /**
+     * @param array $books
+     * @return array
+     */
     public function builderBook(array $books): array
     {
         $arrayBooks = [];

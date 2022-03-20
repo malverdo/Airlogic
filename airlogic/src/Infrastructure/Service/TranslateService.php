@@ -49,7 +49,7 @@ class TranslateService
     }
 
     /**
-     * @param $source
+     * @param $target
      * @param $text
      * @return array|string
      */

@@ -76,7 +76,6 @@ class Author extends AbstractEntity implements AuthorEntityInterface
     public function removeBook(Book $books): self
     {
         if ($this->books->removeElement($books)) {
-            // set the owning side to null (unless already changed)
             if ($books->getAuthor() === $this) {
                 $books->setAuthor(null);
             }

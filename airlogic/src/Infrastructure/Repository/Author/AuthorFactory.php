@@ -6,8 +6,15 @@ use App\Infrastructure\Dto\AuthorCreateRequestDto;
 use App\Infrastructure\Entity\Airlogic\Author;
 use App\Infrastructure\Entity\Airlogic\Book;
 
+/**
+ *
+ */
 class AuthorFactory
 {
+    /**
+     * @param string $name
+     * @return Author
+     */
     public static function authorCreate(string $name): Author
     {
         $author = new Author();
@@ -15,6 +22,11 @@ class AuthorFactory
         return $author;
     }
 
+    /**
+     * @param string $name
+     * @param Book $book
+     * @return Author
+     */
     public static function authorBookCreate(string $name, Book $book): Author
     {
         $author = new Author();
@@ -23,6 +35,10 @@ class AuthorFactory
         return $author;
     }
 
+    /**
+     * @param AuthorCreateRequestDto $dto
+     * @return Author
+     */
     public static function authorDtoCreate(AuthorCreateRequestDto $dto): Author
     {
         $author = new Author();

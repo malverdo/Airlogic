@@ -12,6 +12,9 @@ use App\Infrastructure\Service\TranslateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ *
+ */
 class AuthorController extends AbstractController
 {
 
@@ -19,9 +22,20 @@ class AuthorController extends AbstractController
      * @var AuthorService
      */
     private AuthorService $authorService;
+    /**
+     * @var AuthorRepository
+     */
     private AuthorRepository $authorRepository;
+    /**
+     * @var TranslateService
+     */
     private TranslateService $translate;
 
+    /**
+     * @param AuthorService $authorService
+     * @param AuthorRepository $authorRepository
+     * @param TranslateService $translate
+     */
     public function __construct(
         AuthorService $authorService,
         AuthorRepository $authorRepository,
@@ -48,6 +62,10 @@ class AuthorController extends AbstractController
         ];
     }
 
+    /**
+     * @param Request $request
+     * @return array[]
+     */
     public function search(Request $request): array
     {
         $name = $request->query->get('name');

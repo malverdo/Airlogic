@@ -10,9 +10,15 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
 
-
+/**
+ *
+ */
 class AuthorBookAppFixtures extends Fixture
 {
+    /**
+     * @param ObjectManager $manager
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         $factory = Factory::create('ru_RU');
