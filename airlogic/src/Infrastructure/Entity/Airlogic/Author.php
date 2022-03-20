@@ -34,7 +34,7 @@ class Author extends AbstractEntity implements AuthorEntityInterface
 
     public function getLocaleName(): string
     {
-        return !empty($_ENV['LOCALE']) ? $this->getTranslate()->translate($_ENV['LOCALE'], $this->name) : $this->name;
+        return $_ENV['LOCALE'] == 'ru' ? $this->name  : $this->getTranslate()->translate($_ENV['LOCALE'], $this->name);
     }
 
     /**
