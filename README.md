@@ -7,6 +7,7 @@
 [3.Поднятие проекта](#projectUp "Поднятие проекта") <br>
 [4.Тест](#test "Тест") <br>
 [5.Стек](#stack "Стек") <br>
+[6.Доступы](#access "Стек") <br>
 
 <a name="description"></a>
 ### Описание
@@ -146,3 +147,27 @@ REST API JSON приложение для создания автора и кн�
   * doctrine/doctrine-fixtures-bundle
   * symfony/yaml
   * fzaninotto/faker
+
+<a name="access"></a>
+### Доступы
+Postgres <br>
+* host
+  ```sh
+  172.17.0.1
+  ```
+* port
+  ```sh
+  54321
+  ```
+* login
+  ```sh
+  postgres
+  ```
+* password
+  ```sh
+  root
+  ```
+* dataBase
+  ```sh
+  airlogic
+  ```
