@@ -13,7 +13,7 @@ class TranslateService
     /**
      * @var string
      */
-    private string $source = 'en';
+    private string $source = 'ru';
 
     /**
      * @var int
@@ -24,7 +24,7 @@ class TranslateService
     /**
      * @var string
      */
-    private string $target = 'ru';
+    private string $target = 'en';
 
     /**
      * @var GoogleTranslateForFree
@@ -45,7 +45,17 @@ class TranslateService
      */
     public function defaultTranslate($text)
     {
-        return $this->translate->translate($this->getSource(), $this->getTarget(), $text, $this->getAttempts());
+        return $this->translate->translate($this->getSource(), 'ru', $text, $this->getAttempts());
+    }
+
+    /**
+     * @param $source
+     * @param $text
+     * @return array|string
+     */
+    public function translate($target, $text)
+    {
+        return $this->translate->translate($this->getSource(), $target, $text, $this->getAttempts());
     }
 
     /**

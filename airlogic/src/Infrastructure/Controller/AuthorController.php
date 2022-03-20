@@ -8,6 +8,7 @@ use App\Infrastructure\Exception\InvalidRequestException;
 use App\Infrastructure\Repository\Author\AuthorFactory;
 use App\Infrastructure\Repository\Author\AuthorFlash;
 use App\Infrastructure\Repository\Author\AuthorRepository;
+use App\Infrastructure\Service\TranslateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,11 +20,16 @@ class AuthorController extends AbstractController
      */
     private AuthorService $authorService;
     private AuthorRepository $authorRepository;
+    private TranslateService $translate;
 
-    public function __construct(AuthorService $authorService, AuthorRepository $authorRepository)
-    {
+    public function __construct(
+        AuthorService $authorService,
+        AuthorRepository $authorRepository,
+        TranslateService $translate
+    ) {
         $this->authorService = $authorService;
         $this->authorRepository = $authorRepository;
+        $this->translate = $translate;
     }
 
     /**
@@ -33,7 +39,7 @@ class AuthorController extends AbstractController
     {
         $authorCreateRequestDto = $this->authorService->serializerAndValidation($request->getContent(), AuthorCreateRequestDto::class);
         $author = AuthorFactory::authorDtoCreate($authorCreateRequestDto);
-        $author->setName($this->authorService->defaultTranslate($author->getName()));
+        $author->setName($this->translate->defaultTranslate($author->getName()));
         $this->authorService->save($author);
 
         return [

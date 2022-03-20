@@ -7,7 +7,6 @@ use App\Infrastructure\Repository\Author\AuthorRepository;
 use App\Infrastructure\Repository\BaseRepository\AbstractDomainService;
 use App\Infrastructure\Repository\BaseRepository\Contracts\DomainServiceInterface;
 use App\Infrastructure\Service\SerializerService;
-use App\Infrastructure\Service\TranslateService;
 use App\Infrastructure\Service\ValidationService;
 
 class AuthorService extends AbstractDomainService implements DomainServiceInterface
@@ -16,10 +15,9 @@ class AuthorService extends AbstractDomainService implements DomainServiceInterf
     public function __construct(
         SerializerService $serializerService,
         ValidationService $validationService,
-        TranslateService $translate,
         AuthorRepository $authorRepository
     ) {
-        parent::__construct($serializerService, $validationService, $translate, $authorRepository);
+        parent::__construct($serializerService, $validationService, $authorRepository);
     }
 
 

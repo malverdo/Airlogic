@@ -14,3 +14,11 @@ book.create:
   path: /book/create
   controller: App\Infrastructure\Controller\BookController::create
   methods: POST
+
+book.info.id:
+  path: /{_locale}/book/{id}
+  controller: App\Infrastructure\Controller\BookController::bookInfoId
+  methods: GET
+  requirements:
+    id: '\d+'
+    _locale: en|ru

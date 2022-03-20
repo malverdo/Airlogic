@@ -6,13 +6,9 @@
 parameters:
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+        autowire: true
+        autoconfigure: true
     App\:
         resource: '../src/'
         exclude:
@@ -33,3 +29,7 @@ services:
     App\Infrastructure\EventListener\Views\Views:
         tags:
             - { name: kernel.event_listener, event: kernel.view }
+
+    App\Infrastructure\EventListener\Request\Requestlistener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }

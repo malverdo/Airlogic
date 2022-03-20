@@ -3,9 +3,7 @@
 namespace App\Infrastructure\Repository\BaseRepository;
 
 
-use App\Infrastructure\Entity\Airlogic\Author;
 use App\Infrastructure\Exception\InvalidRequestException;
-use App\Infrastructure\Repository\BaseRepository\Contracts\DtoInterface;
 use App\Infrastructure\Repository\BaseRepository\Contracts\EntityInterface;
 use App\Infrastructure\Repository\BaseRepository\Contracts\RepositoryInterface;
 use App\Infrastructure\Service\SerializerService;
@@ -30,8 +28,6 @@ abstract class AbstractDomainService
      */
     protected RepositoryInterface $repository;
 
-    protected TranslateService $translate;
-
     /**
      * @param SerializerService $serializerService
      * @param ValidationService $validationService
@@ -39,13 +35,11 @@ abstract class AbstractDomainService
     public function __construct(
         SerializerService $serializerService,
         ValidationService $validationService,
-        TranslateService $translate,
         RepositoryInterface $repository
     ) {
         $this->serializerService = $serializerService;
         $this->validationService = $validationService;
         $this->repository = $repository;
-        $this->translate = $translate;
     }
 
     /**
@@ -63,11 +57,6 @@ abstract class AbstractDomainService
     public function serializer($content) : string
     {
         return $this->serializerService->getSerializer()->serialize($content, 'json' );
-    }
-
-    public function defaultTranslate($text)
-    {
-        return $this->translate->defaultTranslate($text);
     }
 
     public function save(EntityInterface $author)

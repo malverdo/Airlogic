@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
-use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\Accessor;
 
 /**
  * @Entity
@@ -28,8 +28,14 @@ class Author extends AbstractEntity implements AuthorEntityInterface
 
     /**
      * @ORM\Column(type="text")
+     * @Accessor(getter="getLocaleName")
      */
     private string $name;
+
+    public function getLocaleName(): string
+    {
+        return isset($_ENV['LOCALE']) ? $this->getTranslate()->translate($_ENV['LOCALE'], $this->name) : $this->name;
+    }
 
     /**
      *

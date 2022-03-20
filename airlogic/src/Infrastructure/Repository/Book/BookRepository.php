@@ -5,6 +5,7 @@ namespace App\Infrastructure\Repository\Book;
 use App\Infrastructure\Entity\Airlogic\Book;
 use App\Infrastructure\Repository\BaseRepository\AbstractRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Infrastructure\Repository\Book\BookFlash;
 
 class BookRepository extends  AbstractRepository
 {
@@ -23,6 +24,10 @@ class BookRepository extends  AbstractRepository
         return 'a';
     }
 
+    public function getFlash(): BookFlash
+    {
+        return new BookFlash();
+    }
 
     public function __construct(ManagerRegistry $registry)
     {

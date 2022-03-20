@@ -16,10 +16,9 @@ class BookService extends AbstractDomainService implements DomainServiceInterfac
     public function __construct(
         SerializerService $serializerService,
         ValidationService $validationService,
-        TranslateService $translate,
         BookRepository $authorRepository
     ) {
-        parent::__construct($serializerService, $validationService, $translate, $authorRepository);
+        parent::__construct($serializerService, $validationService, $authorRepository);
     }
 
     public function getFlash(): AuthorFlash
@@ -31,4 +30,5 @@ class BookService extends AbstractDomainService implements DomainServiceInterfac
     {
         return Book::class;
     }
+
 }

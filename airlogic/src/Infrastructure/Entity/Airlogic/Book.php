@@ -4,12 +4,15 @@ namespace App\Infrastructure\Entity\Airlogic;
 
 
 use App\Infrastructure\Repository\BaseRepository\AbstractEntity;
+use App\Infrastructure\Service\TranslateService;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
+use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Exclude;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -28,8 +31,14 @@ class Book extends AbstractEntity
 
     /**
      * @ORM\Column(type="text")
+     * @Accessor(getter="getLocaleName")
      */
     private string $name;
+
+    public function getLocaleName(): string
+    {
+        return isset($_ENV['LOCALE']) ? $this->getTranslate()->translate($_ENV['LOCALE'], $this->name) : $this->name;
+    }
 
     /**
      *
@@ -38,9 +47,6 @@ class Book extends AbstractEntity
      * @JoinColumn(name="author_id", referencedColumnName="id")
      */
     private Author $author;
-
-
-
 
 
     /**

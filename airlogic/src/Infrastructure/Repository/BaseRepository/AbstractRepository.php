@@ -38,14 +38,16 @@ abstract class AbstractRepository extends ServiceEntityRepository implements Rep
     }
 
 
+    abstract function getFlash(): FlashInterface;
+
     /**
      * @throws NotFoundException
      */
-    public function findId($id, FlashInterface $flash = null, $lockMode = null, $lockVersion = null)
+    public function findId(int $id,  $necessarily = false, $lockMode = null, $lockVersion = null)
     {
         $entity = $this->find($id, $lockMode, $lockVersion);
-        if (!$entity && $flash) {
-            $this->flashException($flash);
+        if ($necessarily && !$entity) {
+            $this->flashException($this->getFlash());
         }
         return $entity;
     }

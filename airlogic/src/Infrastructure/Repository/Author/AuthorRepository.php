@@ -26,6 +26,10 @@ class AuthorRepository  extends  AbstractRepository implements AuthorRepositoryI
         return 'a';
     }
 
+    public function getFlash(): AuthorFlash
+    {
+        return new AuthorFlash();
+    }
 
     public function __construct(ManagerRegistry $registry)
     {
