@@ -31,7 +31,7 @@ App\Infrastructure\Dto\BookCreateRequestDto:
           minMessage: "минимальная длина поле 'name' 3 символа"
           maxMessage: "максимальная длина поле 'name' 50 символа"
     authorId:
-      - NotBlank: { message: "нет поле 'id'" }
+      - NotBlank: { message: "нет поле 'author_id'" }
       - Regex:
-          pattern: '/^((\d)+(\d)+)$/'
-          message: поле 'id' принимает только цифры
+          pattern:  '/(\d)$/'
+          message: поле 'author_id' принимает только цифры

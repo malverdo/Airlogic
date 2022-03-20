@@ -22,7 +22,7 @@ class AuthorBookAppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $factory = Factory::create('ru_RU');
-        for ($i = 1; $i <= 1; $i++) {
+        for ($i = 1; $i <= 10000; $i++) {
             $book = BookFactory::bookCreate($factory->realText(40));
             $author = AuthorFactory::authorBookCreate($factory->name, $book);
             $manager->persist($author);
