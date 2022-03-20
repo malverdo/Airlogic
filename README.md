@@ -114,6 +114,12 @@ REST API JSON приложение для создания автора и кн�
   ```
 * Выполнить команды
   ```sh
+  cd ~/airlogic/
+  ```
+  ```sh
+  composer install
+  ```
+  ```sh
   php bin/console doctrine:migrations:migrate
   ```
   ```sh
