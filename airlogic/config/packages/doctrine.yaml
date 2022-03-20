@@ -5,6 +5,7 @@ doctrine:
             airlogic:
                 url: "pgsql://postgres:root@postgres:5432/airlogic?serverVersion=13&charset=utf8"
                 driver: pdo_pgsql
+                logging: false
 
     orm:
         auto_generate_proxy_classes: true
