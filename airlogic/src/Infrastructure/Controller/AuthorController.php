@@ -69,14 +69,16 @@ class AuthorController extends AbstractController
     public function search(Request $request): array
     {
         $name = $request->query->get('name');
-        $author = $this->authorRepository->findLikeName($name);
-        $authors = [];
-        foreach ($author as $value) {
-            $authors[] = json_decode($this->authorService->serializer($value));
+        if ($name) {
+            $authors = $this->authorRepository->findLikeName($name);
+            $authorsResponse = [];
+            foreach ($authors as $author) {
+                $authorsResponse[] = json_decode($this->authorService->serializer($author));
+            }
+            return [
+                'authors' => $authorsResponse ?: AuthorFlash::getAuthorNotFound()
+            ];
         }
-
-        return [
-            'authors' => $authors ?: AuthorFlash::getAuthorNotFound()
-        ];
+        return [];
     }
 }
