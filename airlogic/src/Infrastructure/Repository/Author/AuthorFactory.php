@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Repository\Author;
 
+use App\Infrastructure\Dto\AuthorCreateRequestDto;
 use App\Infrastructure\Entity\Airlogic\Author;
 use App\Infrastructure\Entity\Airlogic\Book;
 
@@ -22,5 +23,11 @@ class AuthorFactory
         return $author;
     }
 
+    public static function authorDtoCreate(AuthorCreateRequestDto $dto): Author
+    {
+        $author = new Author();
+        $author->setName($dto->name);
+        return $author;
+    }
 
 }

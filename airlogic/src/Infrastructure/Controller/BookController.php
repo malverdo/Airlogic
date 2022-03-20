@@ -10,7 +10,6 @@ use App\Infrastructure\Repository\Author\AuthorRepository;
 use App\Infrastructure\Repository\BaseRepository\Exception\NotFoundException;
 use App\Infrastructure\Repository\Book\BookFactory;
 use App\Infrastructure\Repository\Book\BookFlash;
-use App\Infrastructure\Repository\Book\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -44,7 +43,7 @@ class BookController extends AbstractController
         $this->bookService->save($book);
 
         return [
-            'text' => 'Книга успешно создана',
+            'text' => BookFlash::getBookCreate(),
             'book' => json_decode($this->bookService->serializer($book))
         ];
     }

@@ -1,4 +1,4 @@
-App\Infrastructure\Entity\Airlogic\Author:
+App\Infrastructure\Dto\AuthorCreateRequestDto:
   properties:
     name:
       - NotBlank: {message: "нет поле 'name'"}

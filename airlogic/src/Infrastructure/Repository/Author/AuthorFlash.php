@@ -20,4 +20,9 @@ class AuthorFlash implements FlashInterface
     {
         return   'Автор успешно создан';
     }
+
+    public static function getAuthorSearch(): string
+    {
+        return   'Автор успешной найден';
+    }
 }

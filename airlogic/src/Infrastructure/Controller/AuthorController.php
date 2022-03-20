@@ -3,7 +3,9 @@
 namespace App\Infrastructure\Controller;
 
 use App\Domain\Author\AuthorService;
+use App\Infrastructure\Dto\AuthorCreateRequestDto;
 use App\Infrastructure\Exception\InvalidRequestException;
+use App\Infrastructure\Repository\Author\AuthorFactory;
 use App\Infrastructure\Repository\Author\AuthorFlash;
 use App\Infrastructure\Repository\Author\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,14 +31,14 @@ class AuthorController extends AbstractController
      */
     public function create(Request $request): array
     {
-        $author = $this->authorService->serializerAndValidation($request->getContent());
+        $authorCreateRequestDto = $this->authorService->serializerAndValidation($request->getContent(), AuthorCreateRequestDto::class);
+        $author = AuthorFactory::authorDtoCreate($authorCreateRequestDto);
         $author->setName($this->authorService->defaultTranslate($author->getName()));
         $this->authorService->save($author);
 
         return [
             'text' => AuthorFlash::getAuthorCreate(),
-            'id' => $author->getId(),
-            'name' => $author->getName()
+            'author' => json_decode($this->authorService->serializer($author))
         ];
     }
 
@@ -49,6 +51,8 @@ class AuthorController extends AbstractController
             $authors[] = json_decode($this->authorService->serializer($value));
         }
 
-        return $authors ?: AuthorFlash::getAuthorNotFound();
+        return [
+            'authors' => $authors ?: AuthorFlash::getAuthorNotFound()
+        ];
     }
 }

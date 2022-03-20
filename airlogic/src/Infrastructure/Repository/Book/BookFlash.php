@@ -15,4 +15,9 @@ class BookFlash implements FlashInterface
     {
         return  ['message' => 'Книга не найдена'];
     }
+
+    public static function getBookCreate(): string
+    {
+        return  'Книга успешно создана';
+    }
 }

@@ -51,7 +51,7 @@ abstract class AbstractDomainService
     /**
      * @throws InvalidRequestException
      */
-    public function serializerAndValidation($content, $dtoRequest = null): DtoInterface
+    public function serializerAndValidation($content, $dtoRequest = null)
     {
         $dto = $this->serializerService->getSerializer()->deserialize($content, $dtoRequest , 'json');
         $this->validationService->validator($dto);
