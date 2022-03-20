@@ -21,4 +21,4 @@ book.info.id:
   methods: GET
   requirements:
     id: '\d+'
-    _locale: en|ru
+    _locale: ru|en
