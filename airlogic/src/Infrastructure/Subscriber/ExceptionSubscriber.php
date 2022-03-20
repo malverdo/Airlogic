@@ -34,10 +34,10 @@ class ExceptionSubscriber implements EventSubscriberInterface
     {
         $exception = $event->getThrowable();
         if (
-            is_a($exception,'App\Infrastructure\Exception\InvalidRequestException') ||
-            is_a($exception,'App\Infrastructure\Repository\BaseRepository\Exception\NotFoundException')
+            is_a($exception, 'App\Infrastructure\Exception\InvalidRequestException') ||
+            is_a($exception, 'App\Infrastructure\Repository\BaseRepository\Exception\NotFoundException')
         ) {
-            $array = ['Error' =>  $exception->getMessage()];
+            $array = ['Error' => $exception->getMessage()];
             $response = new JsonResponse();
             $response->setContent(json_encode($array, JSON_UNESCAPED_UNICODE));
             if ($exception instanceof HttpExceptionInterface) {
